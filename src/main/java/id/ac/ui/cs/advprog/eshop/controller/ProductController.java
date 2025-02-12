@@ -36,7 +36,7 @@ public class ProductController {
             model.addAttribute("product", product);
             return "editProduct";
         }
-        return "redirect:list";
+        return "redirect:/product/list";
     }
 
     @PostMapping("/edit/{productId}")
