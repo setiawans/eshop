@@ -1,7 +1,15 @@
 # Eshop
 Steven Setiawan - 2306152260
 
-## Reflection 1
+## Module 2
+### Reflection 1
+> List the code quality issue(s) that you fixed during the exercise and explain your strategy on fixing them.
+
+### Reflection 2
+> Look at your CI/CD workflows (GitHub)/pipelines (GitLab). Do you think the current implementation has met the definition of Continuous Integration and Continuous Deployment? Explain the reasons (minimum 3 sentences)!
+
+## Module 1 
+### Reflection 1
 > You already implemented two new features using Spring Boot. Check again your source code and evaluate the coding standards that you have learned in this module. Write clean code principles and secure coding practices that have been applied to your code.  If you find any mistake in your source code, please explain how to improve your code.
 
 Setelah mengimplementasikan dua fitur baru dengan menggunakan Spring Boot, saya telah mempelajari dan menerapkan beberapa konsep baru dalam _source code_ saya, yaitu:
@@ -13,7 +21,7 @@ Setelah mengimplementasikan dua fitur baru dengan menggunakan Spring Boot, saya 
 
 Setelah menerapkan beberapa konsep dari Clean Code Principles, saya menyadari bahwa masih terdapat beberapa kekurangan dari kode yang saya miliki, terutama dari sisi keamanan. Saat ini, setiap orang dapat melakukan proses _delete_ terhadap setiap produk yang ada dengan memanfaatkan enumerasi/_brute force_, sehingga memungkinkan penghapusan seluruh data yang ada pada sistem database. Untuk menangani hal ini, kedepannya diperlukan suatu sistem autentikasi dan autorisasi dengan memanfaatkan session sehingga setiap pengguna hanya dapat menghapus produk yang mereka buat saja.
 
-## Reflection 2
+### Reflection 2
 > 1. After writing the unit test, how do you feel? How many unit tests should be made in a class? How to make sure that our unit tests are enough to verify our program? It would be good if you learned about code coverage. Code coverage is a metric that can help you understand how much of your source is tested. If you have 100% code coverage, does that mean your code has no bugs or errors? 
 
 Setelah menulis unit test, saya menjadi lebih percaya dengan kualitas dan kebenaran kode yang saya miliki. Selain itu, saya semakin menyadari seberapa pentingnya unit test dalam pemrograman skala besar, seperti pada tingkat _corporation_ ataupun _start up_. Dengan adanya unit test ini, _developer_ dapat secara signifikan mengurangi dan meminimalisir terjadinya suatu bug atau error, sehingga mereka dapat menghemat waktu lebih dalam pengembangan aplikasi.
