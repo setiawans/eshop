@@ -16,7 +16,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/product")
 public class ProductController {
-    private final String REDIRECT_PRODUCT_LIST = "redirect:/product/list";
+    private static final String REDIRECT_PRODUCT_LIST = "redirect:/product/list";
 
     @Autowired
     private ProductService service;
