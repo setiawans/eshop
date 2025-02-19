@@ -1,12 +1,32 @@
 # Eshop
 Steven Setiawan - 2306152260
 
+[![Continuous Integration (CI)](https://github.com/setiawans/eshop/actions/workflows/ci.yml/badge.svg)](https://github.com/setiawans/eshop/actions/workflows/ci.yml)
+[![Scorecard supply-chain security](https://github.com/setiawans/eshop/actions/workflows/scorecard.yml/badge.svg)](https://github.com/setiawans/eshop/actions/workflows/scorecard.yml)
+[![pmd](https://github.com/setiawans/eshop/actions/workflows/pmd.yml/badge.svg)](https://github.com/setiawans/eshop/actions/workflows/pmd.yml)
+
+### URL Aplikasi
+[Klik Link Ini Untuk Membuka Aplikasi](https://loud-krysta-adproeshop-f8c13c2d.koyeb.app/)
+
 ## Module 2
 ### Reflection 1
 > List the code quality issue(s) that you fixed during the exercise and explain your strategy on fixing them.
 
+Setelah menyelesaikan module 2 ini, saya telah menemukan dan memperbaiki beberapa permasalahan _code quality_, seperti:
+1. Memperbaiki repetasi kode pada ProductController dengan membuat suatu variabel yang merepresentasikan "redirect:/product/list".
+2. Mengubah field "REDIRECT_PRODUCT_LIST" pada ProductController menjadi static. Hal ini dilakukan karena valuenya merupakan suatu konstanta (bernilai final) yang digunakan sebagai String redirect.
+3. Menghapus _public modifier_ dari ProductService untuk menghindari akses yang tidak diinginkan atau _unexpected behaviour_.
+4. Menerapkan _Pinned Dependencies_ pada Github Actions untuk memastikan versi dari setiap Actions terkiat dengan suatu commit, tidak mengikuti latest update. Hal ini mencegah terjadinya _security problem_ dan _changes_ pada GitHub Actions yang digunakan.
+5. Menerapkan _Pinned Dependencies_ pada Dockerfile dengan memanfaatkan tools "crane".
+6. Menambahkan LICENSE dan SECURITY.md untuk memperjelas legalitas pada project ini dan tata cara melaporkan kerentanan yang ada kepada _maintainer_ repository ini.
+7. Menghapus _wildcard import_ menjadi _import_ spesifik di ProductController dan HomeController. Hal ini dilakukan untuk meningkatkan _code readability_ dan menunjukkan depedensi yang sebenarnya dibutuhkan.
+
 ### Reflection 2
 > Look at your CI/CD workflows (GitHub)/pipelines (GitLab). Do you think the current implementation has met the definition of Continuous Integration and Continuous Deployment? Explain the reasons (minimum 3 sentences)!
+
+Berdasarkan CI/CD workflows yang saya miliki, saya yakin bahwa implementasi saat ini telah memenuhi definisi dari _Continuous Integration_ dan _Continuous Deployment_. Berikut adalah alasannya:
+1. Saya telah menerapkan konsep CI dengan memanfaatkan Github Actions yang secara otomatis menjalankan _test suite_ dengan memanfaatkan gradle yang ada. Kemudian, saya juga telah memanfaatkan _OSSF Scorecard_ dan _PMD_ untuk melakukan _code scanning_ terhadap kode yang saya miliki. Dengan demikian, saya dapat memperbaiki berbagai _code quality issues_ sehingga _codebase_ yang saya miliki menjadi lebih baik. Dengan menerapkan beberapa GitHub Actions tersebut, saya telah meminimalisir kemungkinan kesalahan kode pada fase CI.
+2. Selanjutnya, dari sisi CD, saya telah memanfaatkan Koyeb yang secara otomatis melakukan deployment ketika terjadi suatu tindakan atau _action push_ ke branch main. Dalam menggunakan Koyeb, saya juga didukung dengan Dockerfile yang memungkinkan saya untuk memilih _environment deployment_ yang ingin digunakan.
 
 ## Module 1 
 ### Reflection 1
