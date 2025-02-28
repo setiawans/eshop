@@ -8,6 +8,49 @@ Steven Setiawan - 2306152260
 ### URL Aplikasi
 [Klik Link Ini Untuk Membuka Aplikasi](https://loud-krysta-adproeshop-f8c13c2d.koyeb.app/)
 
+## Module 3
+### Reflection 1
+> Explain what principles you apply to your project!
+
+Setelah menyelesaikan module 3 ini, saya telah mengimplementasikan beberapa _SOLID principles_, seperti:
+1. **Single Responsibility Principle**, yaitu dengan melakukan _refactor_ dengan memisahkan Car dan Product menjadi dua file Controller terpisah, sehingga setiap kelas hanya bertanggung jawab pada satu entitas saja.
+2. **Open/Closed Principle**, yaitu dengan membuat Repository _interface_ dan mengimplementasikannya pada ProductRepository dan CarRepository. Hal ini mengizinkan kita menambahkan Repository baru yang mengimplementasikan _interface_ tersebut tanpa mengubah kode yang telah ada.
+3. **Dependency Inversion Principle**, yaitu dengan mengganti tipe dari variabel carService pada CarController menjadi CarService (sebelumnya CarServiceImpl). Hal ini dilakukan karena CarController seharusnya bergantung pada abstraksi (_interface_) dibandingkan dengan implementasi.
+4. **Interface Segregation Principle**, yang dapat dilihat pada pemecahan IRepository menjadi dua _interface_ yang lebih kecil yaitu IRepositoryRead dan IRepositoryWrite, hal ini mengizinkan kita untuk membuat Repository baru yang hanya mengimplementasikan sebagian _method_, baik _read_ maupun _write_.
+
+### Reflection 2
+> Explain the advantages of applying SOLID principles to your project with examples.
+
+Terdapat beberapa keuntungan dengan mengimplementasikan _SOLID principles_, seperti:
+1. **Mempermudah proses _code maintenance_**
+   Dengan menerapkan _SOLID principles_, terutama _Single Responsibility Principle_ (SRP), setiap fungsi atau _method_ memiliki tanggung jawab yang jelas, sehingga perubahannya hanya perlu dilakukan pada bagian yang diinginkan tanpa memengaruhi bagian kode yang lain. Hal ini terlihat pada beberapa _part_ dari _repository_ ini, seperti CarRepository yang memiliki fungsi `create`, `update`, dan `delete` yang mandiri satu sama lainnya.
+
+2. **Meningkatkan _code readability_**
+   Dengan menerapkan _SOLID principles_, kode kita menjadi lebih mudah dibaca. Hal ini terbukti pada _repository_ ini, di mana seluruh fungsi dapat dibaca dalam 1 layar monitor tanpa perlu melakukan _scrolling_. Selain itu, setiap fungsi yang ada jelas tujuannya, baik berdasarkan nama fungsi maupun nama variabel di dalamnya. Hal ini didukung oleh pemecahan kode yang terlalu kompleks menjadi bagian yang lebih kecil.
+
+3. **Meningkatkan fleksibilitas kode**
+   Dengan menerapkan _SOLID principles_, terutama _Open/Closed Principle_, kita dapat menambahkan fitur baru, tanpa harus mengubah kode yang ada. Hal ini dapat dilihat pada kode IRepository kita, di mana apabila kita ingin mengganti ProductRepository ataupun CarRepository, maka kode lain yang mengimplementasikan IRepository tidak akan terganggu.
+
+4. **Mengurangi beban implementasi**
+   Dengan menerapkan _SOLID principles_, terutama _Interface Segregation Principle_, setiap kelas yang kita miliki hanya perlu mengimplementasikan metode yang benar-benar diperlukan. Hal ini dapat dilihat pada pemecahan IRepository menjadi dua, yaitu IRepositoryRead dan IRepositoryWrite, di mana kita dapat memilih hanya untuk mengimplementasikan salah satu dari kedua _interface_ tersebut.
+
+### Reflection 3
+> Explain the disadvantages of not applying SOLID principles to your project with examples.
+
+Terdapat beberapa kerugian jika kita tidak mengimplementasikan _SOLID Principles_, yaitu:
+1. **Sulitnya melakukan proses _refactoring_**
+   Apabila kita tidak menerapkan prinsip OCP dan DIP, maka kode yang kita miliki akan sangat sulit untuk diubah atau dilakukan proses _refactoring_. Contohnya, apabila kode pada ProductController dan CarController tidak menerapkan kedua prinsip tersebut, maka setiap perubahan pada salah satu fitur bisa memengaruhi keseluruhan kode pada _controller_, yang mengakibatkan perubahan fungsionalitas dari tujuan awal dibuatnya kode tersebut.
+
+2. **Sulitnya menambahkan kode baru**
+   Apabila kita tidak menerapkan _SOLID principles_, setiap kali kita ingin melakukan penambahan kode, bisa saja kita harus melakukan banyak perubahan terhadap kode yang telah ada. Hal ini tercerminkan pada bagian-bagian kode seperti ServiceImpl dan Repository.
+
+3. **Sulitnya membaca kode**
+   Apabila kita tidak menerapkan _SOLID principles_, bisa saja kode yang kita miliki menjadi sulit dibaca, seperti kode yang terlalu panjang atau terlalu kompleks, sehingga perlu waktu lebih lama untuk memahami keseluruhan kode. Hal ini dapat terjadi pada bagian mana saja pada _codebase_ ini.
+
+4. **Sulitnya melakukan pengujian terhadap kode yang ada**
+   Apabila kita tidak menerapkan _SOLID principles_, maka terdapat kemungkinan kode kita menjadi sulit untuk dilakukan pengecekan (seperti melalui _unit test_). Hal ini disebabkan  kode-kode tersebut bisa saja memiliki _depedency_ terhadap bagian kode yang lain sehingga diperlukan usaha lebih untuk membuat _test_ yang baik. Hal ini dapat dilihat pada _mocking_ dari suatu variabel.
+
+
 ## Module 2
 ### Reflection 1
 > List the code quality issue(s) that you fixed during the exercise and explain your strategy on fixing them.

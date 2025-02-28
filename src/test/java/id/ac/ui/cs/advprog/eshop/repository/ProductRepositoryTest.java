@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.Iterator;
 
@@ -37,7 +36,7 @@ class ProductRepositoryTest {
     }
 
     @Test
-    void  testEditProduct() {
+    void testUpdateProduct() {
         Product product = new Product();
         product.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
         product.setProductName("Sampo Cap Bambang");
@@ -48,19 +47,19 @@ class ProductRepositoryTest {
         updatedProduct.setProductName("Sampo Cap Asep");
         updatedProduct.setProductQuantity(150);
 
-        Product editedProduct = productRepository.edit(product.getProductId(), updatedProduct);
+        Product editedProduct = productRepository.update(product.getProductId(), updatedProduct);
         assertEquals(product.getProductId(), editedProduct.getProductId());
         assertEquals("Sampo Cap Asep", editedProduct.getProductName());
         assertEquals(150, editedProduct.getProductQuantity());
     }
 
     @Test
-    void testEditNonExistentProduct() {
+    void testUpdateNonExistentProduct() {
         Product product = new Product();
         product.setProductName("Sampo Cap Editan");
         product.setProductQuantity(20);
 
-        Product editedProduct = productRepository.edit("eb558e9f-1c39-460e-8860-71af6af63bd6", product);
+        Product editedProduct = productRepository.update("eb558e9f-1c39-460e-8860-71af6af63bd6", product);
         assertNull(editedProduct);
     }
 
