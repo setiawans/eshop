@@ -7,12 +7,14 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public class CarRepository {
-    static int id = 0;
+public class CarRepository implements IRepository<Car> {
     private List<Car> carData;
 
-    public CarRepository() { carData = new ArrayList<>(); }
+    public CarRepository() {
+        carData = new ArrayList<>();
+    }
 
+    @Override
     public Car create(Car car) {
         if (car.getCarId() == null) {
             car.setCarId(generateId());
@@ -25,10 +27,12 @@ public class CarRepository {
         return UUID.randomUUID().toString();
     }
 
+    @Override
     public Iterator<Car> findAll() {
         return carData.iterator();
     }
 
+    @Override
     public Car findById(String id) {
         for (Car car : carData) {
             if (car.getCarId().equals(id)) {
@@ -38,6 +42,7 @@ public class CarRepository {
         return null;
     }
 
+    @Override
     public Car update(String id, Car updatedCar) {
         Car car = findById(id);
         if (car != null) {
@@ -53,5 +58,8 @@ public class CarRepository {
         car.setCarQuantity(updatedCar.getCarQuantity());
     }
 
-    public void delete(String id) { carData.removeIf(car -> car.getCarId().equals(id)); }
+    @Override
+    public void delete(String id) {
+        carData.removeIf(car -> car.getCarId().equals(id));
+    }
 }

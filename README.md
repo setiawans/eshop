@@ -8,6 +8,17 @@ Steven Setiawan - 2306152260
 ### URL Aplikasi
 [Klik Link Ini Untuk Membuka Aplikasi](https://loud-krysta-adproeshop-f8c13c2d.koyeb.app/)
 
+## Module 3
+### Reflection 1
+> Explain what principles you apply to your project!
+
+### Reflection 2
+> Explain the advantages of applying SOLID principles to your project with examples.
+
+### Reflection 3
+> Explain the disadvantages of not applying SOLID principles to your project with examples.
+
+
 ## Module 2
 ### Reflection 1
 > List the code quality issue(s) that you fixed during the exercise and explain your strategy on fixing them.
