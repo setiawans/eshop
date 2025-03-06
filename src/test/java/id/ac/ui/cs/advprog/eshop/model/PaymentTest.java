@@ -29,7 +29,7 @@ public class PaymentTest {
                 System.currentTimeMillis(), "Steven", OrderStatus.WAITING_PAYMENT.getValue());
 
         paymentData = new HashMap<>();
-        paymentData.put("voucherCode", "ESHOP123456789AB");
+        paymentData.put("voucherCode", "ESHOP12345678ABC");
 
         payment = new Payment("1424f2b7-2af2-4b6e-a43b-a25cb252e958", order,
                 "VOUCHER", "SUCCESS", paymentData);
@@ -45,6 +45,23 @@ public class PaymentTest {
     }
 
     @Test
+    void testSetOrder() {
+        List<Product> newProducts = new ArrayList<>();
+        Product newProduct = new Product();
+        newProduct.setProductId("new-product-id");
+        newProduct.setProductName("New Product");
+        newProduct.setProductQuantity(1);
+        newProducts.add(newProduct);
+
+        Order newOrder = new Order("new-order-id", newProducts,
+                System.currentTimeMillis(), "Setiawan", OrderStatus.WAITING_PAYMENT.getValue());
+
+        payment.setOrder(newOrder);
+        assertEquals(newOrder, payment.getOrder());
+        assertNotEquals(order, payment.getOrder());
+    }
+
+    @Test
     void testSetMethod() {
         payment.setMethod("BANK_TRANSFER");
         assertEquals("BANK_TRANSFER", payment.getMethod());
@@ -54,5 +71,96 @@ public class PaymentTest {
     void testSetStatus() {
         payment.setStatus("REJECTED");
         assertEquals("REJECTED", payment.getStatus());
+    }
+
+    @Test
+    void testSetPaymentData() {
+        Map<String, String> newPaymentData = new HashMap<>();
+        newPaymentData.put("voucherCode", "ESHOP87654321XYZ");
+
+        payment.setPaymentData(newPaymentData);
+        assertEquals(newPaymentData, payment.getPaymentData());
+        assertNotEquals(paymentData, payment.getPaymentData());
+    }
+
+    @Test
+    void testInvalidVoucherCode() {
+        Map<String, String> invalidVoucherData = new HashMap<>();
+        invalidVoucherData.put("voucherCode", "INVALID12345");
+
+        payment.setPaymentData(invalidVoucherData);
+        assertEquals("ESHOP12345678ABC", payment.getPaymentData().get("voucherCode"));
+    }
+
+    @Test
+    void testEmptyVoucherCode() {
+        Map<String, String> emptyVoucherData = new HashMap<>();
+        emptyVoucherData.put("voucherCode", "");
+
+        payment.setPaymentData(emptyVoucherData);
+        assertEquals("ESHOP12345678ABC", payment.getPaymentData().get("voucherCode"));
+    }
+
+    @Test
+    void testNullVoucherCode() {
+        Map<String, String> nullVoucherData = new HashMap<>();
+        nullVoucherData.put("voucherCode", null);
+
+        payment.setPaymentData(nullVoucherData);
+        assertEquals("ESHOP12345678ABC", payment.getPaymentData().get("voucherCode"));
+    }
+
+    @Test
+    void testVoucherThatDoesNotStartWithESHOP() {
+        Map<String, String> invalidVoucherData = new HashMap<>();
+        invalidVoucherData.put("voucherCode", "SHOP1234567890AB");
+
+        payment.setPaymentData(invalidVoucherData);
+        assertEquals("ESHOP12345678ABC", payment.getPaymentData().get("voucherCode"));
+    }
+
+    @Test
+    void testVoucherShorterThan16Characters() {
+        Map<String, String> invalidVoucherData = new HashMap<>();
+        invalidVoucherData.put("voucherCode", "ESHOP12345");
+
+        payment.setPaymentData(invalidVoucherData);
+        assertEquals("ESHOP12345678ABC", payment.getPaymentData().get("voucherCode"));
+    }
+
+    @Test
+    void testVoucherLongerThan16Characters() {
+        Map<String, String> invalidVoucherData = new HashMap<>();
+        invalidVoucherData.put("voucherCode", "ESHOP12345678901234");
+
+        payment.setPaymentData(invalidVoucherData);
+        assertEquals("ESHOP12345678ABC", payment.getPaymentData().get("voucherCode"));
+    }
+
+    @Test
+    void testVoucherWithLessThan8Numbers() {
+        Map<String, String> invalidVoucherData = new HashMap<>();
+        invalidVoucherData.put("voucherCode", "ESHOP123ABCDEFGHI");
+
+        payment.setPaymentData(invalidVoucherData);
+        assertEquals("ESHOP12345678ABC", payment.getPaymentData().get("voucherCode"));
+    }
+
+    @Test
+    void testVoucherWithMoreThan8Numbers() {
+        Map<String, String> invalidVoucherData = new HashMap<>();
+        invalidVoucherData.put("voucherCode", "ESHOP1234567890AB");
+
+        payment.setPaymentData(invalidVoucherData);
+        assertEquals("ESHOP12345678ABC", payment.getPaymentData().get("voucherCode"));
+    }
+
+    @Test
+    void testVoucherCodeWithLowerCasePrefix() {
+        Map<String, String> invalidVoucherData = new HashMap<>();
+        invalidVoucherData.put("voucherCode", "eshop12345678ABCD");
+
+        payment.setPaymentData(invalidVoucherData);
+        assertEquals("ESHOP12345678ABC", payment.getPaymentData().get("voucherCode"));
     }
 }
