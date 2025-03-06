@@ -9,10 +9,8 @@ import java.util.Map;
 @Getter
 public class Payment {
     String id;
-
     @Setter
     Order order;
-
     String method;
     String status;
     Map<String, String> paymentData;
@@ -52,7 +50,6 @@ public class Payment {
         if (voucherCode == null) {
             return false;
         }
-
         if (voucherCode.length() != 16) {
             return false;
         }
@@ -92,14 +89,18 @@ public class Payment {
 
     public void setStatus(String status) {
         String[] statusList = {"SUCCESS", "REJECTED"};
-        if (Arrays.asList(statusList).contains(status)) {
+        if (Arrays.stream(statusList).noneMatch(item -> (item.equals(status)))) {
+            throw new IllegalArgumentException("status is not valid");
+        } else {
             this.status = status;
         }
     }
 
     public void setMethod(String method) {
         String[] methodList = {"VOUCHER", "BANK_TRANSFER"};
-        if (Arrays.asList(methodList).contains(method)) {
+        if (Arrays.stream(methodList).noneMatch(item -> (item.equals(method)))) {
+            throw new IllegalArgumentException("method is not valid");
+        } else {
             this.method = method;
         }
     }
@@ -107,6 +108,8 @@ public class Payment {
     public void setPaymentData(Map<String, String> paymentData) {
         if (validatePaymentData(paymentData)) {
             this.paymentData = paymentData;
+        } else {
+            throw new IllegalArgumentException("paymentData is not valid");
         }
     }
 }

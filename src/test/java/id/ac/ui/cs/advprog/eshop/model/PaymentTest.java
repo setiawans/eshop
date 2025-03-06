@@ -88,7 +88,11 @@ public class PaymentTest {
         Map<String, String> invalidVoucherData = new HashMap<>();
         invalidVoucherData.put("voucherCode", "INVALID12345");
 
-        payment.setPaymentData(invalidVoucherData);
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            payment.setPaymentData(invalidVoucherData);
+        });
+
+        assertEquals("paymentData is not valid", exception.getMessage());
         assertEquals("ESHOP12345678ABC", payment.getPaymentData().get("voucherCode"));
     }
 
@@ -97,7 +101,11 @@ public class PaymentTest {
         Map<String, String> emptyVoucherData = new HashMap<>();
         emptyVoucherData.put("voucherCode", "");
 
-        payment.setPaymentData(emptyVoucherData);
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            payment.setPaymentData(emptyVoucherData);
+        });
+
+        assertEquals("paymentData is not valid", exception.getMessage());
         assertEquals("ESHOP12345678ABC", payment.getPaymentData().get("voucherCode"));
     }
 
@@ -106,7 +114,11 @@ public class PaymentTest {
         Map<String, String> nullVoucherData = new HashMap<>();
         nullVoucherData.put("voucherCode", null);
 
-        payment.setPaymentData(nullVoucherData);
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            payment.setPaymentData(nullVoucherData);
+        });
+
+        assertEquals("paymentData is not valid", exception.getMessage());
         assertEquals("ESHOP12345678ABC", payment.getPaymentData().get("voucherCode"));
     }
 
@@ -115,7 +127,11 @@ public class PaymentTest {
         Map<String, String> invalidVoucherData = new HashMap<>();
         invalidVoucherData.put("voucherCode", "SHOP1234567890AB");
 
-        payment.setPaymentData(invalidVoucherData);
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            payment.setPaymentData(invalidVoucherData);
+        });
+
+        assertEquals("paymentData is not valid", exception.getMessage());
         assertEquals("ESHOP12345678ABC", payment.getPaymentData().get("voucherCode"));
     }
 
@@ -124,7 +140,11 @@ public class PaymentTest {
         Map<String, String> invalidVoucherData = new HashMap<>();
         invalidVoucherData.put("voucherCode", "ESHOP12345");
 
-        payment.setPaymentData(invalidVoucherData);
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            payment.setPaymentData(invalidVoucherData);
+        });
+
+        assertEquals("paymentData is not valid", exception.getMessage());
         assertEquals("ESHOP12345678ABC", payment.getPaymentData().get("voucherCode"));
     }
 
@@ -133,7 +153,11 @@ public class PaymentTest {
         Map<String, String> invalidVoucherData = new HashMap<>();
         invalidVoucherData.put("voucherCode", "ESHOP12345678901234");
 
-        payment.setPaymentData(invalidVoucherData);
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            payment.setPaymentData(invalidVoucherData);
+        });
+
+        assertEquals("paymentData is not valid", exception.getMessage());
         assertEquals("ESHOP12345678ABC", payment.getPaymentData().get("voucherCode"));
     }
 
@@ -142,7 +166,11 @@ public class PaymentTest {
         Map<String, String> invalidVoucherData = new HashMap<>();
         invalidVoucherData.put("voucherCode", "ESHOP123ABCDEFGHI");
 
-        payment.setPaymentData(invalidVoucherData);
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            payment.setPaymentData(invalidVoucherData);
+        });
+
+        assertEquals("paymentData is not valid", exception.getMessage());
         assertEquals("ESHOP12345678ABC", payment.getPaymentData().get("voucherCode"));
     }
 
@@ -151,7 +179,11 @@ public class PaymentTest {
         Map<String, String> invalidVoucherData = new HashMap<>();
         invalidVoucherData.put("voucherCode", "ESHOP1234567890AB");
 
-        payment.setPaymentData(invalidVoucherData);
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            payment.setPaymentData(invalidVoucherData);
+        });
+
+        assertEquals("paymentData is not valid", exception.getMessage());
         assertEquals("ESHOP12345678ABC", payment.getPaymentData().get("voucherCode"));
     }
 
@@ -160,7 +192,11 @@ public class PaymentTest {
         Map<String, String> invalidVoucherData = new HashMap<>();
         invalidVoucherData.put("voucherCode", "eshop12345678ABCD");
 
-        payment.setPaymentData(invalidVoucherData);
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            payment.setPaymentData(invalidVoucherData);
+        });
+
+        assertEquals("paymentData is not valid", exception.getMessage());
         assertEquals("ESHOP12345678ABC", payment.getPaymentData().get("voucherCode"));
     }
 
