@@ -84,7 +84,6 @@ class OrderServiceImplTest {
     @Test
     void testUpdateStatusInvalidStatus() {
         Order order = orders.get(1);
-        doReturn(order).when(orderRepository).findById(order.getId());
 
         assertThrows(IllegalArgumentException.class,
                 () -> orderService.updateStatus(order.getId(), "MEOW"));

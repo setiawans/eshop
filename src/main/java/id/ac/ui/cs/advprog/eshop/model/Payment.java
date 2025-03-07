@@ -52,6 +52,8 @@ public class Payment {
     private boolean validatePaymentData(Map<String, String> paymentData) {
         if (this.method.equals(PaymentMethod.VOUCHER.getValue())) {
             return validateVoucherPayment(paymentData.get("voucherCode"));
+        } else if (this.method.equals(PaymentMethod.TRANSFER_BANK.getValue())) {
+            return validateBankPayment(paymentData);
         } else {
             return false;
         }
@@ -77,6 +79,21 @@ public class Payment {
         }
 
         if (numericCount != 8) {
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean validateBankPayment(Map<String, String> paymentData) {
+        String bankName = paymentData.get("bankName");
+        String referenceCode = paymentData.get("referenceCode");
+
+        if (bankName == null || referenceCode == null) {
+            return false;
+        }
+
+        if (bankName.length() == 0 || referenceCode.length() == 0) {
             return false;
         }
 
