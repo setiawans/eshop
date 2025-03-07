@@ -18,8 +18,7 @@ public class Payment {
     String status;
     Map<String, String> paymentData;
 
-    public Payment(String id, Order order, String method, Map<String, String> paymentData) {
-        this.id = id;
+    public Payment(Order order, String method, Map<String, String> paymentData) {
         this.method = method;
 
         if (order == null) {
@@ -36,6 +35,11 @@ public class Payment {
             this.status = PaymentStatus.SUCCESS.getValue();
             this.paymentData = paymentData;
         }
+    }
+
+    public Payment(String id, Order order, String method, Map<String, String> paymentData) {
+        this(order, method, paymentData);
+        this.id = id;
     }
 
     private boolean validatePaymentData(Map<String, String> paymentData) {
