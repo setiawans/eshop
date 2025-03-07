@@ -7,10 +7,7 @@ import id.ac.ui.cs.advprog.eshop.model.Product;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -21,6 +18,7 @@ class PaymentRepositoryTest {
     @BeforeEach
     void setUp() {
         paymentRepository = new PaymentRepository();
+        payments = new ArrayList<>();
 
         List<Product> products = new ArrayList<>();
         Product product = new Product();
@@ -37,13 +35,13 @@ class PaymentRepositoryTest {
 
         Map<String, String> paymentData = new HashMap<>();
         paymentData.put("voucherCode", "ESHOP12345678ABC");
-        Payment payment = new Payment(order,
+        Payment payment = new Payment(UUID.randomUUID().toString(), order,
                 PaymentMethod.VOUCHER.getValue(), paymentData);
 
         Map<String, String> paymentData2 = new HashMap<>();
         paymentData2.put("bankName", "BNI");
         paymentData2.put("referenceCode", "BNIMURAH");
-        Payment payment2 = new Payment(order2,
+        Payment payment2 = new Payment(UUID.randomUUID().toString(), order2,
                 PaymentMethod.TRANSFER_BANK.getValue(), paymentData2);
 
         payments.add(payment);
@@ -73,7 +71,7 @@ class PaymentRepositoryTest {
         paymentData.put("bankName", "BCA");
         paymentData.put("referenceCode", "BCAMURAH");
 
-        Payment newPayment = new Payment(payment.getOrder(),
+        Payment newPayment = new Payment(payment.getId(), payment.getOrder(),
                 PaymentMethod.TRANSFER_BANK.getValue(), paymentData);
         Payment result = paymentRepository.save(newPayment);
 

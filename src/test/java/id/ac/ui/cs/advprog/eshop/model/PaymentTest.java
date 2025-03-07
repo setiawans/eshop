@@ -6,10 +6,7 @@ import id.ac.ui.cs.advprog.eshop.enums.PaymentStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -33,7 +30,7 @@ public class PaymentTest {
         paymentData = new HashMap<>();
         paymentData.put("voucherCode", "ESHOP12345678ABC");
 
-        payment = new Payment(order, PaymentMethod.VOUCHER.getValue(), paymentData);
+        payment = new Payment(UUID.randomUUID().toString(), order, PaymentMethod.VOUCHER.getValue(), paymentData);
     }
 
     @Test
@@ -48,7 +45,8 @@ public class PaymentTest {
     void testPaymentCreationVoucherFailed() {
         Map<String, String> paymentData = new HashMap<>();
         paymentData.put("voucherCode", "ESHOP123456789ABC");
-        Payment payment = new Payment(order, PaymentMethod.VOUCHER.getValue(), paymentData);
+        Payment payment = new Payment(UUID.randomUUID().toString(), order,
+                PaymentMethod.VOUCHER.getValue(), paymentData);
         assertEquals(order, payment.getOrder());
         assertEquals(PaymentMethod.VOUCHER.getValue(), payment.getMethod());
         assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
@@ -57,7 +55,8 @@ public class PaymentTest {
 
     @Test
     void testPaymentCreationVoucherNull() {
-        Payment payment = new Payment(order, PaymentMethod.VOUCHER.getValue(), null);
+        Payment payment = new Payment(UUID.randomUUID().toString(), order,
+                PaymentMethod.VOUCHER.getValue(), null);
         assertEquals(order, payment.getOrder());
         assertEquals(PaymentMethod.VOUCHER.getValue(), payment.getMethod());
         assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
@@ -70,7 +69,8 @@ public class PaymentTest {
         paymentData.put("voucherCode", "ESHOP123456789ABC");
 
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            Payment payment = new Payment( null, PaymentMethod.VOUCHER.getValue(), paymentData);
+            Payment payment = new Payment( UUID.randomUUID().toString(), null,
+                    PaymentMethod.VOUCHER.getValue(), paymentData);
         });
 
         assertEquals("order is null", exception.getMessage());
@@ -237,7 +237,8 @@ public class PaymentTest {
         Map<String, String> invalidBankData = new HashMap<>();
         invalidBankData.put("referenceCode", "REF123456789");
 
-        Payment payment = new Payment(order, PaymentMethod.TRANSFER_BANK.getValue(), invalidBankData);
+        Payment payment = new Payment(UUID.randomUUID().toString(), order,
+                PaymentMethod.TRANSFER_BANK.getValue(), invalidBankData);
 
         assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
         assertNull(payment.getPaymentData());
@@ -248,7 +249,8 @@ public class PaymentTest {
         Map<String, String> invalidBankData = new HashMap<>();
         invalidBankData.put("bankName", "BCA");
 
-        Payment payment = new Payment(order, PaymentMethod.TRANSFER_BANK.getValue(), invalidBankData);
+        Payment payment = new Payment(UUID.randomUUID().toString(), order,
+                PaymentMethod.TRANSFER_BANK.getValue(), invalidBankData);
 
         assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
         assertNull(payment.getPaymentData());
@@ -260,7 +262,8 @@ public class PaymentTest {
         invalidBankData.put("bankName", null);
         invalidBankData.put("referenceCode", null);
 
-        Payment payment = new Payment(order, PaymentMethod.TRANSFER_BANK.getValue(), invalidBankData);
+        Payment payment = new Payment(UUID.randomUUID().toString(), order,
+                PaymentMethod.TRANSFER_BANK.getValue(), invalidBankData);
 
         assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
         assertNull(payment.getPaymentData());
@@ -272,7 +275,8 @@ public class PaymentTest {
         invalidBankData.put("bankName", "");
         invalidBankData.put("referenceCode", "");
 
-        Payment payment = new Payment(order, PaymentMethod.TRANSFER_BANK.getValue(), invalidBankData);
+        Payment payment = new Payment(UUID.randomUUID().toString(), order,
+                PaymentMethod.TRANSFER_BANK.getValue(), invalidBankData);
 
         assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
         assertNull(payment.getPaymentData());
@@ -284,7 +288,8 @@ public class PaymentTest {
         validBankData.put("bankName", "BCA");
         validBankData.put("referenceCode", "REF123456789");
 
-        Payment payment = new Payment(order, PaymentMethod.TRANSFER_BANK.getValue(), validBankData);
+        Payment payment = new Payment(UUID.randomUUID().toString(), order,
+                PaymentMethod.TRANSFER_BANK.getValue(), validBankData);
 
         assertEquals(PaymentStatus.SUCCESS.getValue(), payment.getStatus());
         assertEquals(validBankData, payment.getPaymentData());

@@ -18,8 +18,8 @@ public class Payment {
     String status;
     Map<String, String> paymentData;
 
-    public Payment(Order order, String method, Map<String, String> paymentData) {
-        this.id = UUID.randomUUID().toString();
+    public Payment(String id, Order order, String method, Map<String, String> paymentData) {
+        this.id = id;
         this.method = method;
 
         if (order == null) {
