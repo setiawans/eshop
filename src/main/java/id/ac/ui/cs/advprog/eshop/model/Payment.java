@@ -19,6 +19,7 @@ public class Payment {
     Map<String, String> paymentData;
 
     public Payment(Order order, String method, Map<String, String> paymentData) {
+        this.id = UUID.randomUUID().toString();
         this.method = method;
 
         if (order == null) {
