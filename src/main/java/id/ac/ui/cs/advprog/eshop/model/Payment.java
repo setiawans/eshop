@@ -89,15 +89,8 @@ public class Payment {
         String bankName = paymentData.get("bankName");
         String referenceCode = paymentData.get("referenceCode");
 
-        if (bankName == null || referenceCode == null) {
-            return false;
-        }
-
-        if (bankName.length() == 0 || referenceCode.length() == 0) {
-            return false;
-        }
-
-        return true;
+        return bankName != null && !bankName.isEmpty() &&
+                referenceCode != null && !referenceCode.isEmpty();
     }
 
     public void setStatus(String status) {
