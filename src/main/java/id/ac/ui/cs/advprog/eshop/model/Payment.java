@@ -43,6 +43,12 @@ public class Payment {
         this.id = id;
     }
 
+    public Payment(String id, Order order, String method, Map<String, String> paymentData, String status) {
+        this(order, method, paymentData);
+        this.id = id;
+        this.status = status;
+    }
+
     private boolean validatePaymentData(Map<String, String> paymentData) {
         if (this.method.equals(PaymentMethod.VOUCHER.getValue())) {
             return validateVoucherPayment(paymentData.get("voucherCode"));
