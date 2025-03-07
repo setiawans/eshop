@@ -231,4 +231,67 @@ public class PaymentTest {
         assertEquals("paymentData is not valid", exception.getMessage());
         assertEquals("ESHOP12345678ABC", payment.getPaymentData().get("voucherCode"));
     }
+
+    @Test
+    void testBankTransferConstructorWithMissingBankName() {
+        Map<String, String> invalidBankData = new HashMap<>();
+        invalidBankData.put("referenceCode", "REF123456789");
+
+        Payment payment = new Payment(UUID.randomUUID().toString(), order,
+                PaymentMethod.TRANSFER_BANK.getValue(), invalidBankData);
+
+        assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
+        assertNull(payment.getPaymentData());
+    }
+
+    @Test
+    void testBankTransferConstructorWithMissingReferenceCode() {
+        Map<String, String> invalidBankData = new HashMap<>();
+        invalidBankData.put("bankName", "BCA");
+
+        Payment payment = new Payment(UUID.randomUUID().toString(), order,
+                PaymentMethod.TRANSFER_BANK.getValue(), invalidBankData);
+
+        assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
+        assertNull(payment.getPaymentData());
+    }
+
+    @Test
+    void testBankTransferConstructorWithNullData() {
+        Map<String, String> invalidBankData = new HashMap<>();
+        invalidBankData.put("bankName", null);
+        invalidBankData.put("referenceCode", null);
+
+        Payment payment = new Payment(UUID.randomUUID().toString(), order,
+                PaymentMethod.TRANSFER_BANK.getValue(), invalidBankData);
+
+        assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
+        assertNull(payment.getPaymentData());
+    }
+
+    @Test
+    void testBankTransferConstructorWithEmptyData() {
+        Map<String, String> invalidBankData = new HashMap<>();
+        invalidBankData.put("bankName", "");
+        invalidBankData.put("referenceCode", "");
+
+        Payment payment = new Payment(UUID.randomUUID().toString(), order,
+                PaymentMethod.TRANSFER_BANK.getValue(), invalidBankData);
+
+        assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
+        assertNull(payment.getPaymentData());
+    }
+
+    @Test
+    void testValidBankTransferPayment() {
+        Map<String, String> validBankData = new HashMap<>();
+        validBankData.put("bankName", "BCA");
+        validBankData.put("referenceCode", "REF123456789");
+
+        Payment payment = new Payment(UUID.randomUUID().toString(), order,
+                PaymentMethod.TRANSFER_BANK.getValue(), validBankData);
+
+        assertEquals(PaymentStatus.SUCCESS.getValue(), payment.getStatus());
+        assertEquals(validBankData, payment.getPaymentData());
+    }
 }
