@@ -1,5 +1,6 @@
 package id.ac.ui.cs.advprog.eshop.service;
 
+import id.ac.ui.cs.advprog.eshop.enums.PaymentStatus;
 import id.ac.ui.cs.advprog.eshop.model.Order;
 import id.ac.ui.cs.advprog.eshop.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,10 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order updateStatus(String orderId, String status) {
+        if (!PaymentStatus.contains(status)) {
+            throw new IllegalArgumentException("Invalid status");
+        }
+        
         Order order = orderRepository.findById(orderId);
         if (order != null) {
             Order newOrder = new Order(order.getId(), order.getProducts(),

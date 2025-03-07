@@ -30,8 +30,6 @@ public class Payment {
 
         if (paymentData == null) {
             this.status = PaymentStatus.REJECTED.getValue();
-        } else if (!validatePaymentData(paymentData)) {
-            this.status = PaymentStatus.REJECTED.getValue();
         } else {
             this.status = PaymentStatus.SUCCESS.getValue();
             this.paymentData = paymentData;
@@ -47,57 +45,6 @@ public class Payment {
         this(order, method, paymentData);
         this.id = id;
         this.status = status;
-    }
-
-    private boolean validatePaymentData(Map<String, String> paymentData) {
-        if (this.method.equals(PaymentMethod.VOUCHER.getValue())) {
-            return validateVoucherPayment(paymentData.get("voucherCode"));
-        } else if (this.method.equals(PaymentMethod.TRANSFER_BANK.getValue())) {
-            return validateBankPayment(paymentData);
-        } else {
-            return false;
-        }
-    }
-
-    private boolean validateVoucherPayment(String voucherCode) {
-        if (voucherCode == null) {
-            return false;
-        }
-        if (voucherCode.length() != 16) {
-            return false;
-        }
-
-        if (!voucherCode.startsWith("ESHOP")) {
-            return false;
-        }
-
-        int numericCount = 0;
-        for (char c : voucherCode.toCharArray()) {
-            if (Character.isDigit(c)) {
-                numericCount++;
-            }
-        }
-
-        if (numericCount != 8) {
-            return false;
-        }
-
-        return true;
-    }
-
-    private boolean validateBankPayment(Map<String, String> paymentData) {
-        String bankName = paymentData.get("bankName");
-        String referenceCode = paymentData.get("referenceCode");
-
-        if (bankName == null || referenceCode == null) {
-            return false;
-        }
-
-        if (bankName.length() == 0 || referenceCode.length() == 0) {
-            return false;
-        }
-
-        return true;
     }
 
     public void setStatus(String status) {
@@ -116,11 +63,4 @@ public class Payment {
         }
     }
 
-    public void setPaymentData(Map<String, String> paymentData) {
-        if (validatePaymentData(paymentData)) {
-            this.paymentData = paymentData;
-        } else {
-            throw new IllegalArgumentException("paymentData is not valid");
-        }
-    }
 }
