@@ -8,6 +8,21 @@ Steven Setiawan - 2306152260
 ### URL Aplikasi
 [Klik Link Ini Untuk Membuka Aplikasi](https://loud-krysta-adproeshop-f8c13c2d.koyeb.app/)
 
+## Module 4
+### Reflection 1
+> Reflect based on Percival (2017) proposed self-reflective questions (in “Principles and Best Practice of Testing” submodule, chapter “Evaluating Your Testing Objectives”), whether this TDD flow is useful enough for you or not. If not, explain things that you need to do next time you make more tests.
+
+Berdasarkan hasil pekerjaan saya pada module 4, TDD (Test-Driven Development) yang telah saya lakukan sangat bermanfaat karena membantu saya dalam meminimalisir munculnya bug sejak awal melakukan kegiatan _coding_. Namun, saya juga menyadari bahwa cakupan pengujian (_test coverage_) dari TDD ini masih terbatas, terutama untuk _edge case_ yang mungkin muncul dan tidak disadari saat membuat test pada awal proses _development_. Selain itu, pengujian saat ini hanya berfokus pada _unit test_, sehingga perlu dipertimbangkan untuk menambahkan jenis test lainnya seperti _functional test_ ataupun test-test untuk menguji integrasi komponen-komponen yang ada.
+
+Untuk pengembangan selanjutnya, saya perlu meningkatkan aspek _maintainability_ dari test yang saya buat. Meskipun test yang saya tulis sudah cukup jelas, tetapi saya masih belum melakukan dokumentasi untuk setiap test case yang ada. Selain itu, saya juga perlu lebih konsisten dalam menerapkan pola Red-Green-Refactor, terutama pada bagian-bagian yang sering terlewatkan ketika test sudah berhasil dijalankan. Dengan perbaikan-perbaikan ini, saya yakin praktik TDD yang saya lakukan akan lebih efektif lagi dan memberikan manfaat yang besar, terutama terhadap project pengembangan software yang mungkin saya lakukan ke depannya.
+
+### Reflection 2
+> You have created unit tests in Tutorial. Now reflect whether your tests have successfully followed F.I.R.S.T. principle or not. If not, explain things that you need to do the next time you create more tests.
+ 
+Secara keseluruhan, unit test yang saya buat dalam tutorial ini telah cukup baik mengikuti prinsip F.I.R.S.T, meskipun masih terdapat beberapa aspek lagi yang dapat ditingkatkan. Dari segi Fast, pengujian saya berjalan dengan cepat karena berfokus pada unit-unit kecil dari kode. Hal ini memungkinkan saya menjalankan pengujian secara efisien tanpa memakan waktu yang lama. Ddalam aspek Independent, sebagian besar unit test saya sudah independen satu sama lain, sehingga perubahan di salah satu test tidak akan mempengaruhi test lainnya.
+
+Untuk aspek Repeatable dan Self-Validating, unit test saya sudah mampu memberikan hasil yang konsisten setiap dijalankan dengan hasil yang jelas (passed/failed) tanpa memerlukan interpretasi yang dilakukan secara manual. Terkait Timely, saya telah menulis pengujian sesuai alur TDD, yaitu Red-Green-Refactor. Ke depannya, saya perlu meningkatkan cakupan pengujian untuk mencakup lebih banyak _edge cases_ dan skenario-skenario kesalahan yang mungkin terjadi. Selain itu, saya juga perlu memastikan bahwa setiap test memiliki fokus yang jelas dengan menguji satu fungsionalitas speisfik. Dengan perbaikan-perbaikan ini, saya yakin unit test yang saya buat akan bekerja lebih baik dan efektif lagi.
+
 ## Module 3
 ### Reflection 1
 > Explain what principles you apply to your project!
